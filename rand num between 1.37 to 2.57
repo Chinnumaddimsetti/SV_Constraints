@@ -1,0 +1,46 @@
+/* rand num between 1.37 to 2.57   */
+class ran;
+	rand int b;
+	real num;
+	constraint value {b inside{[137:190]};}
+	function void post_randomize();
+		num=b/100.0;
+		$display("number :%0.2f",num);
+	endfunction 
+endclass 
+module tb;
+	ran r;
+	initial
+		begin 
+		r=new();
+		if(r.randomize())	begin 
+			r.post_randomize();
+		end 
+		else 
+			begin 
+			$display("err");
+			end 
+		end 
+endmodule
+*/
+// rand number between 1.20 to 9.99 
+/*class ran;
+	rand int b; 
+	real num;
+	constraint c1{b inside{[120:999]};}
+	function void post_randomize();
+		num=b/100.0;
+		$display("number %0.3f:",num);
+	endfunction 
+endclass 
+module top;
+	ran r;
+	initial
+	 begin 
+	 r=new();
+	 if(r.randomize())begin 
+		r.post_randomize();end
+	 else begin
+		$display("err");end
+		end 
+endmodule
