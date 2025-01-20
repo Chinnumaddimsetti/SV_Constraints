@@ -22,7 +22,7 @@ module tb;
 			end 
 		end 
 endmodule
-*/
+
 // rand number between 1.20 to 9.99 
 /*class ran;
 	rand int b; 
@@ -44,3 +44,4 @@ module top;
 		$display("err");end
 		end 
 endmodule
+*/
