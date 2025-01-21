@@ -1,0 +1,36 @@
+Write constraint to generate random values 25,27,30,36,40,45 for the integer  
+//"a" without using "set membership".
+//constraint value{ b>24;b<46;(a%9==0||a%5==0); a!=35);
+// set membership
+class pattern;
+	rand int value[];
+	constraint c0{value.size==10;}
+	//constraint c1{foreach (value[i])
+	//	value[i] inside{25,27,30,36,40,45};}
+	
+	constraint c1 {
+        foreach (value[i]) { 
+            value[i] > 24;            
+            value[i] < 46;           
+            (value[i] % 9 == 0 ||     
+             value[i] % 5 == 0);     
+            value[i] != 35;          
+        }
+    }
+
+	function void post_randomize();
+		$display("the result %p",value);
+	endfunction
+endclass
+module top;
+	pattern p;
+	initial
+		begin 
+		p=new();
+		if(p.randomize())begin 
+		p.post_randomize();end
+	 else begin
+		$display("err");end
+		end 
+endmodule
+*/
