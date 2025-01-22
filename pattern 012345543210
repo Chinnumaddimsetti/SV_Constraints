@@ -1,0 +1,28 @@
+// pattern 012345543210 
+class pattern;
+	rand int da[];
+	constraint c1{da.size==12;}
+	constraint c2{foreach (da[i])
+					if (i<7)
+						da[i]==i;
+					else 
+						da[i]==12-i-1;
+				}
+	function void post_randomize();
+		//$display("size %d",da.size());
+		$display("array da:%p",da);
+	endfunction
+endclass
+	
+module top;
+  pattern p;
+
+  initial begin
+    p = new();
+    if (p.randomize()) begin
+      p.post_randomize();
+    end else begin
+      $display("Randomization failed!");
+    end
+  end
+endmodule
