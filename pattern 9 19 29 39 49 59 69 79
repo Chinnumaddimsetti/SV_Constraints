@@ -1,0 +1,25 @@
+// pattern 9 19 29 39 49 59 69 79 
+class pattern;
+	rand int da[];
+	constraint c1{da.size==8;}
+	constraint c2{foreach (da[i])
+					da[i]==(i+1)*9+i;
+				}
+	function void post_randomize();
+		//$display("size %d",da.size());
+		$display("array da:%p",da);
+	endfunction
+endclass
+	
+module top;
+  pattern p;
+
+  initial begin
+    p = new();
+    if (p.randomize()) begin
+      p.post_randomize();
+    end else begin
+      $display("Randomization failed!");
+    end
+  end
+endmodule
