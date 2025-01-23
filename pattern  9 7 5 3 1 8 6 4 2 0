@@ -1,0 +1,32 @@
+ // 9 7 5 3 1 8 6 4 2 0 
+class pattern;
+	rand int da[];
+	int count1=11;
+	int count2=10;
+	constraint c1{da.size==10;}
+	constraint c2{foreach (da[i])
+				if(i<5)
+					da[i]==count1-2*(i+1);
+					//count1=da[i];
+				else 
+					da[i]==count2-2*(i-4);
+					//count2=da[i];
+				}
+	function void post_randomize();
+		//$display("size %d",da.size());
+		$display("array da:%p",da);
+	endfunction
+endclass
+	
+module top;
+  pattern p;
+
+  initial begin
+    p = new();
+    if (p.randomize()) begin
+      p.post_randomize();
+    end else begin
+      $display("Randomization failed!");
+    end
+  end
+endmodule
