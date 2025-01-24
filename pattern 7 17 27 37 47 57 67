@@ -1,0 +1,26 @@
+//7 17 27 37 47 57 67 
+
+class pattern;
+	rand int da[];
+	int count1=7;
+	constraint c1{da.size==7;}
+	constraint c2{foreach (da[i])
+				da[i]==count1+(10*i);
+				}
+	function void post_randomize();
+		$display("array da:%p",da);
+	endfunction
+endclass
+	
+module top;
+  pattern p;
+
+  initial begin
+    p = new();
+    if (p.randomize()) begin
+      p.post_randomize();
+    end else begin
+      $display("Randomization failed!");
+    end
+  end
+endmodule
