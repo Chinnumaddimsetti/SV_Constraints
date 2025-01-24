@@ -1,0 +1,31 @@
+/*when the transaction class object is randomized, the value of a should not 
+be same as previous  5 occurrences of the value of a */
+class pattern;
+  rand bit [3:0] a;
+  bit [3:0] q[0:4];
+  constraint C1 { foreach (q[i]) a != q[i]; }
+
+  function void pre_randomize();
+    if (q.size >= 4)
+      q.pop_back();
+  endfunction
+
+  function void post_randomize();
+    q.push_front(a);
+	//$display("q %p",q);
+  endfunction
+endclass
+
+	
+module top;
+  pattern p;
+
+  initial begin
+    p = new();
+    if (p.randomize()) begin
+      p.post_randomize();
+    end else begin
+      $display("Randomization failed!");
+    end
+  end
+endmodule
