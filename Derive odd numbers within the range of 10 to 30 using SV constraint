@@ -1,0 +1,20 @@
+class pattern;
+	rand int a;
+	constraint c1{a inside{[10:30]};
+					a%2==1;}
+	
+endclass
+	
+module top;
+  pattern p=new();
+  initial begin
+  repeat(10) begin
+    if (p.randomize()) begin
+      p.post_randomize();
+	  $display("odd number %d",p.a);
+    end else begin
+      $display("Randomization failed!");
+    end
+  end
+  end
+endmodule
