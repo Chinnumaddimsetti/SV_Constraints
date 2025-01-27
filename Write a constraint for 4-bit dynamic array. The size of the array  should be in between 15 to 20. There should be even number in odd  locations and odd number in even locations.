@@ -1,0 +1,27 @@
+*Write a constraint for 4-bit dynamic array. The size of the array 
+should be in between 15 to 20. There should be even number in odd 
+locations and odd number in even locations. */ 
+class pattern;
+	rand bit [3:0]a[];
+	constraint c1{a.size inside{[15:20]};}
+	constraint c2{foreach (a[i]){
+						if (i%2==1)
+							a[i]==0;
+						else 
+							a[i]==1;
+							}}
+endclass
+	
+module top;
+  pattern p=new();
+  initial begin
+  repeat(10) begin
+    if (p.randomize()) begin
+      p.post_randomize();
+	  $display("value of a %p",p.a);
+    end else begin
+      $display("Randomization failed!");
+    end
+  end
+  end
+endmodule
