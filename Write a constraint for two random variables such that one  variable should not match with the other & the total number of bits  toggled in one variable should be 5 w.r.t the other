@@ -1,0 +1,23 @@
+/*Write a constraint for two random variables such that one 
+variable should not match with the other & the total number of bits 
+toggled in one variable should be 5 w.r.t the other.*/
+class my_class;
+  rand bit [7:0] var1, var2;
+
+  constraint c1 {
+    var1 != var2; // Ensure the two variables do not match
+    (var1 ^ var2).countones() == 5; // Ensure exactly 5 bits are toggled between var1 and var2
+  }
+endclass
+module tb;
+  initial begin
+    my_class obj = new();
+    repeat (10) begin
+      if (obj.randomize()) begin
+        $display("var1: %b, var2: %b, Toggled bits: %0d", obj.var1, obj.var2, (obj.var1 ^ obj.var2).countones());
+      end else begin
+        $display("Randomization failed!");
+      end
+    end
+  end
+endmodule
