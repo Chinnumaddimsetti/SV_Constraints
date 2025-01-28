@@ -1,0 +1,32 @@
+// Constraint to generate 0, 1, x and z randomly.
+
+typedef enum{s0,s1,s2,s3}val_t;
+class pattern;
+	rand val_t val;
+	constraint c1{val inside {s0,s1,s2,s3};}
+	function string get_random_value();
+		case(val)
+			s0:return "0";
+			s1:return "1";
+			s2:return "X";
+			s3:return "Z";
+		endcase
+	endfunction 
+endclass 
+module top;
+	pattern p=new();
+	initial 
+		begin 
+		repeat(10)
+			begin 
+			if(p.randomize())
+				begin 
+					$display("value %s",p.get_random_value());
+				end 
+			else 
+				begin 
+					$display("err");
+				end 
+			end 
+		end 
+endmodule
