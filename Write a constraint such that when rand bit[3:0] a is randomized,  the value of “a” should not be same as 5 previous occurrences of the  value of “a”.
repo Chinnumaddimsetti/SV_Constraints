@@ -1,0 +1,24 @@
+/* Write a constraint such that when rand bit[3:0] a is randomized, 
+the value of “a” should not be same as 5 previous occurrences of the 
+value of “a”.*/
+class pattern;
+	rand bit[3:0]a;
+	int q[$:7];
+	constraint c1{!(a inside{q});}
+	function void post_randomize();
+		q.push_front(a);
+		$display("value of a=%0d ",a);
+		if(q.size==6)
+			q.pop_back();
+		$display("pre occ %0p\n",q);
+	endfunction
+endclass 
+module top;
+	pattern p=new();
+	initial begin 
+		repeat(10)
+			begin 
+			p.randomize();
+			end 
+		end 
+endmodule
