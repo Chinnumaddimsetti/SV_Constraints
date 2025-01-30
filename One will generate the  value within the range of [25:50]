@@ -1,0 +1,21 @@
+/*There are two constraints applied to same variable. One will generate the 
+value within the range of [25:50] and another expression should be greater 
+than 40. What should be the value generated, and what is the reason?*/
+class pattern ;
+	rand int data;
+	constraint c1{data inside {[25:50]};}
+	constraint c2{data>40;}
+endclass
+module top;
+	pattern p=new();
+	initial
+		begin 
+			repeat(10)
+				begin 
+				if(p.randomize())
+					$display("data %d",p.data);
+				else 
+					$display("err");
+				end 
+		end 
+endmodule
