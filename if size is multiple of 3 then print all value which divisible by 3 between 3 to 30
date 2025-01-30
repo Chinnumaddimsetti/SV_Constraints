@@ -1,0 +1,28 @@
+/* dynamic array must be between 5 to 10
+if size is multiple of 3 then print all value which divisible by 3 between 3 to 30
+ if not the prime number between 2 to 20 */
+class pattern ;
+	randc int da[];
+	constraint c1{da.size inside {[5:10]};}
+	constraint c2{foreach (da[i]){
+					if (da.size%3==0) 
+						da[i] inside {3,6,9,12,15,18,21,24,27,30};
+					else 
+						da[i] inside {2,3,5,7,11,13,17,19};
+					}}
+endclass 
+module top;
+	pattern p=new();
+	initial 
+		begin 
+			if(p.randomize())
+				begin 
+					$display("size of array %0d",p.da.size);
+					$display("value %p",p.da);
+				end 
+			else 
+				begin 
+					$display("err");
+				end 
+		end 
+endmodule
