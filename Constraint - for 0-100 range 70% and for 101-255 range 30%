@@ -1,0 +1,19 @@
+//  Constraint - for 0-100 range 70% and for 101-255 range 30%
+
+class pattern ;
+	rand int da;
+	constraint c1{da dist{[0:100] :=7,[101:250]:=3};}
+endclass
+module top;
+	pattern p=new();
+	initial
+		begin 
+			repeat(10)
+				begin 
+				if(p.randomize())
+					$display("data %p",p.da);
+				else 
+					$display("err");
+				end 
+		end 
+endmodule 
