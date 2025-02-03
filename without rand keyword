@@ -1,0 +1,24 @@
+// without rand keyword
+class con;
+	int data[15];
+	function new();
+		foreach (data[i]) begin 
+			data[i]=i;
+			end 
+	endfunction 
+	function void display();
+		$display("\n\n");
+		$display("\t\t unique value =%d",data);
+		$display("\n \n");
+	endfunction 
+	function void data_shuffle();
+		data.shuffle();
+	endfunction  
+module jk;
+	con h=new();
+	initial
+		begin 
+		h.data_shuffle();
+		h.display();
+		end 
+endmodule
